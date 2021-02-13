@@ -6,6 +6,9 @@ import * as actions from './store/actions/auth';
 //libraries
 import 'antd/dist/antd.css';
 import { connect } from 'react-redux';
+//components
+import BaseRouter from './BaseRouter';
+import CustomLayout from './containers/CustomLayout';
 
 //developer mode (set to false when building)
 const development_mode = false;
@@ -19,7 +22,11 @@ class App extends Component {
     render() {
         return (
             <div>
-                <h1>CurrentApp</h1>
+                <Router>
+                    <CustomLayout {...this.props}>
+                        <BaseRouter />
+                    </CustomLayout>
+                </Router>
             </div>
         );
     }
