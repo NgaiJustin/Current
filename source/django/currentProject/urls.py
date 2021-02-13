@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     # ADMIN
-    path('admin/', admin.site.urls),
+    path('admin/home', admin.site.urls),
     # AUTHENTICATION: HANDLED BY REST FRAMEWORK
     path('api-auth/', include('rest_framework.urls')),
     path('rest-auth/', include('rest_auth.urls')),

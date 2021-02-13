@@ -1,124 +1,220 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
+
+//redux
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import * as actions from '../store/actions/auth';
-// import {LoadingOutlined} from '@ant-design/icons';
 
+//antd
+import {
+    Form,
+    Input,
+    Tooltip,
+    Cascader,
+    Select,
+    Row,
+    Col,
+    Checkbox,
+    Button,
+    AutoComplete,
+  } from 'antd';
+import { QuestionCircleOutlined } from '@ant-design/icons';
+
+//predef constants
+const { Option } = Select;
+const residences = [
+{
+    value: 'zhejiang',
+    label: 'Zhejiang',
+    children: [
+    {
+        value: 'hangzhou',
+        label: 'Hangzhou',
+        children: [
+        {
+            value: 'xihu',
+            label: 'West Lake',
+        },
+        ],
+    },
+    ],
+},
+{
+    value: 'jiangsu',
+    label: 'Jiangsu',
+    children: [
+    {
+        value: 'nanjing',
+        label: 'Nanjing',
+        children: [
+        {
+            value: 'zhonghuamen',
+            label: 'Zhong Hua Men',
+        },
+        ],
+    },
+    ],
+},
+];
+const formItemLayout = {
+labelCol: {
+    xs: {
+    span: 24,
+    },
+    sm: {
+    span: 8,
+    },
+},
+wrapperCol: {
+    xs: {
+    span: 24,
+    },
+    sm: {
+    span: 16,
+    },
+},
+};
+const tailFormItemLayout = {
+wrapperCol: {
+    xs: {
+    span: 24,
+    offset: 0,
+    },
+    sm: {
+    span: 16,
+    offset: 8,
+    },
+},
+};
+
+function RegistrationForm  (props) {
+    const [form] = Form.useForm();
   
+    const onFinish = (values) => {
+      console.log('Received values of form: ', values);
+      props.onAuth(
+        values.username,
+        values.email,
+        values.password,
+        values.confirm
+    );
+    props.history.push('/');
 
-const FormItem = Form.Item;
-
-class RegistrationForm extends React.Component {
-  state = {
-    confirmDirty: false,
-  };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
-      if (!err) {
-        this.props.onAuth(
-            values.userName,
-            values.email,
-            values.password,
-            values.confirm
-        );
-        this.props.history.push('/');
-      }
-    });
-  }
-
-  handleConfirmBlur = (e) => {
-    const value = e.target.value;
-    this.setState({ confirmDirty: this.state.confirmDirty || !!value });
-  }
-
-  compareToFirstPassword = (rule, value, callback) => {
-    const form = this.props.form;
-    if (value && value !== form.getFieldValue('password')) {
-      callback('Two passwords that you enter is inconsistent!');
-    } else {
-      callback();
-    }
-  }
-
-  validateToNextPassword = (rule, value, callback) => {
-    const form = this.props.form;
-    if (value && this.state.confirmDirty) {
-      form.validateFields(['confirm'], { force: true });
-    }
-    callback();
-  }
-
-
-  render() {
-    const { getFieldDecorator } = this.props.form;
+    };
+  
+    const prefixSelector = (
+      <Form.Item name="prefix" noStyle>
+        <Select
+          style={{
+            width: 70,
+          }}
+        >
+          <Option value="86">+86</Option>
+          <Option value="87">+87</Option>
+        </Select>
+      </Form.Item>
+    );
 
     return (
-      <Form onSubmit={this.handleSubmit}>
-        
-        <FormItem>
-            {getFieldDecorator('userName', {
-                rules: [{ required: true, message: 'Please input your username!' }],
-            })(
-                <Input  placeholder="Username" />
-            )}
-        </FormItem>
-        
-        <FormItem>
-          {getFieldDecorator('email', {
-            rules: [{
-              type: 'email', message: 'The input is not valid E-mail!',
-            }, {
-              required: true, message: 'Please input your E-mail!',
-            }],
-          })(
-            <Input  placeholder="Email" />
-          )}
-        </FormItem>
-
-        <FormItem>
-          {getFieldDecorator('password', {
-            rules: [{
-              required: true, message: 'Please input your password!',
-            }, {
-              validator: this.validateToNextPassword,
-            }],
-          })(
-            <Input  type="password" placeholder="Password" />
-          )}
-        </FormItem>
-
-        <FormItem>
-          {getFieldDecorator('confirm', {
-            rules: [{
-              required: true, message: 'Please confirm your password!',
-            }, {
-              validator: this.compareToFirstPassword,
-            }],
-          })(
-            <Input  type="password" placeholder="Password" onBlur={this.handleConfirmBlur} />
-          )}
-        </FormItem>
-
-        <FormItem>
-        <Button type="primary" htmlType="submit" style={{marginRight: '10px'}}>
-            Signup
-        </Button>
-        Or 
-        <NavLink 
-            style={{marginRight: '10px'}} 
-            to='/login/'> login
-        </NavLink>
-        </FormItem>
-
+      <Form
+        {...formItemLayout}
+        form={form}
+        name="register"
+        onFinish={onFinish}
+        initialValues={{
+          residence: ['zhejiang', 'hangzhou', 'xihu'],
+          prefix: '86',
+        }}
+        scrollToFirstError
+      >
+        <Form.Item
+          name="username"
+          label="Username"
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="email"
+          label="E-mail"
+          rules={[
+            {
+              type: 'email',
+              message: 'The input is not valid E-mail!',
+            },
+            {
+              required: true,
+              message: 'Please input your E-mail!',
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+  
+        <Form.Item
+          name="password"
+          label="Password"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+          hasFeedback
+        >
+          <Input.Password />
+        </Form.Item>
+  
+        <Form.Item
+          name="confirm"
+          label="Confirm Password"
+          dependencies={['password']}
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: 'Please confirm your password!',
+            },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue('password') === value) {
+                  return Promise.resolve();
+                }
+  
+                return Promise.reject('The two passwords that you entered do not match!');
+              },
+            }),
+          ]}
+        >
+          <Input.Password />
+        </Form.Item>
+  
+  
+        <Form.Item
+          name="agreement"
+          valuePropName="checked"
+          rules={[
+            {
+              validator: (_, value) =>
+                value ? Promise.resolve() : Promise.reject('Should accept agreement'),
+            },
+          ]}
+          {...tailFormItemLayout}
+        >
+          <Checkbox>
+            I have read the <a href="">agreement</a>
+          </Checkbox>
+        </Form.Item>
+        <Form.Item {...tailFormItemLayout}>
+          <Button type="primary" htmlType="submit">
+            Register
+          </Button>
+        </Form.Item>
       </Form>
     );
-  }
-}
+  };
 
-
+  
+//redux
 const mapStateToProps = (state) => {
     return {
         loading: state.loading,
