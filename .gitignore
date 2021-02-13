@@ -1,7 +1,14 @@
 .DS_Store
 
 # dependencies
-/node_modules
+/currentProject/node_modules
+/currentProject/package-lock.json
+/currentProject/env
+/currentProject/build
+/currentProject/express-server/node_modules
+/currentProject/express-server/package-lock.json
+
+
 /.pnp
 .pnp.js
 
