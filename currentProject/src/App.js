@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+//react built-int components
+import React, { Component } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+//authentication handling
+import * as actions from './store/actions/auth';
+//libraries
+import 'antd/dist/antd.css';
+import { connect } from 'react-redux';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+//developer mode (set to false when building)
+const development_mode = false;
+
+class App extends Component {
+
+    componentDidMount() {
+        this.props.onTryAutoSignin();
+    }
+
+    render() {
+        return (
+            <div>
+                <h1>CurrentApp</h1>
+            </div>
+        );
+    }
 }
 
-export default App;
+const mapStateToProps = state => {
+    if (development_mode){
+        return {
+            isAuthenticated: true
+        }
+    }
+    return {
+        isAuthenticated: state.token !== null
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onTryAutoSignin: () => dispatch(actions.authCheckState())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
