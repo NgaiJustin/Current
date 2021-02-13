@@ -44,9 +44,3 @@ class VideoDeleteView(DestroyAPIView):
     queryset = Video.objects.all()
     serializer_class = VideoSerializer
     permission_classes = (permissions.IsAuthenticated, )
-
-
-# class UserListView(ListAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
-#     permission_classes = (permissions.AllowAny, )
