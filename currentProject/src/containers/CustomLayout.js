@@ -32,7 +32,7 @@ class CustomLayout extends React.Component {
                     </div>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>
-                  Treehacks Project ©2021 Created by NoNameTeam
+                  Current ©2021 Created by TeamName
                 </Footer>
             </Layout>
         );
