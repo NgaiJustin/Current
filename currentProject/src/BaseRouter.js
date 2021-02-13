@@ -6,8 +6,8 @@ import UploadVideo from "./containers/UploadVideoView";
 import VideoDetail from "./containers/VideoDetailView";
 import Login from "./containers/Login";
 import Signup from "./containers/Signup";
-import CreateRoom from "./containers/CreateRoomView";
-import Room from "./containers/RoomView";
+import Chat from './components/Chat/Chat';
+import Join from './components/Join/Join';
 
 const BaseRouter = () => (
     <div>
@@ -16,8 +16,8 @@ const BaseRouter = () => (
         <Route exact path="/login/" component={Login} />{" "}
         <Route exact path="/signup/" component={Signup} />{" "}
         <Route exact path="/upload/" component={UploadVideo} />{" "}
-        <Route exact path="/createroom/"  component={CreateRoom} />
-        <Route exact path="/room/:roomID" component={Room} />
+        <Route exact path="/join" component={Join} />
+        <Route path="/chat" component={Chat} />
     </div>
 );
 
