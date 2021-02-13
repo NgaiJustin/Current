@@ -12,5 +12,5 @@ urlpatterns = [
     # API's
     path('api/', include('currentApp.api.urls')),
     # SINGLE PAGE VIEW: simply renders index.html from React build folder
-    # re_path(r'^.*', TemplateView.as_view(template_name='index.html')),
+    re_path(r'^.*', TemplateView.as_view(template_name='index.html')),
 ]
