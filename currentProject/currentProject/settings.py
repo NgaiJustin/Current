@@ -43,7 +43,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-ROOT_URLCONF = 'treehacksProject.urls'
+ROOT_URLCONF = 'currentProject.urls'
 
 TEMPLATES = [
     {
@@ -62,7 +62,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'treehacksProject.wsgi.application'
+WSGI_APPLICATION = 'currentProject.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#datab
