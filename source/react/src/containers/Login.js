@@ -1,11 +1,12 @@
 import React from 'react';
-import { Form, Icon, Input, Button, Spin } from 'antd';
+import { Form, Input, Button, Spin } from 'antd';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import * as actions from '../store/actions/auth';
+import {LoadingOutlined} from '@ant-design/icons';
 
 const FormItem = Form.Item;
-const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
+const antIcon = <LoadingOutlined />;
 
 
 class NormalLoginForm extends React.Component {
@@ -44,7 +45,7 @@ class NormalLoginForm extends React.Component {
                     {getFieldDecorator('userName', {
                         rules: [{ required: true, message: 'Please input your username!' }],
                     })(
-                        <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+                        <Input placeholder="Username" />
                     )}
                     </FormItem>
 
@@ -52,7 +53,7 @@ class NormalLoginForm extends React.Component {
                     {getFieldDecorator('password', {
                         rules: [{ required: true, message: 'Please input your Password!' }],
                     })(
-                        <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+                        <Input type="password" placeholder="Password" />
                     )}
                     </FormItem>
 
@@ -73,7 +74,6 @@ class NormalLoginForm extends React.Component {
   }
 }
 
-const WrappedNormalLoginForm = Form.create()(NormalLoginForm);
 
 const mapStateToProps = (state) => {
     return {
@@ -88,4 +88,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(WrappedNormalLoginForm);
+export default connect(mapStateToProps, mapDispatchToProps)(NormalLoginForm);
