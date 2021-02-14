@@ -8,13 +8,13 @@ python3 -m venv env
 source env/bin/activate
 pip install -r pip_pkgs.txt
 
-**setup react**
+**setup react:**
 cd source/react
 npm run dev
 
 
 
-Run each processes in separate terminals:
+**Run each processes in separate terminals:**
 cd source/django & python3 manage.py runserver
 cd source/express & npm run dev
 
