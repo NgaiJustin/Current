@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import Video from "twilio-video";
-import Lobby from "./Lobby";
+import Lobby from "../../../Lobby";
 import Room from "./Room";
 
 const proxy = "http://localhost:3001";

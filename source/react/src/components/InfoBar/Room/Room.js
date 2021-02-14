@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import Participant from "./Participant";
+import Participant from "../../../Participant";
 import SpeechRecognition, {
     useSpeechRecognition,
 } from "react-speech-recognition";
