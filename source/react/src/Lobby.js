@@ -7,8 +7,8 @@ const Lobby = ({
     connecting,
 }) => {
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>Enter a room</h2>
+        <form class="join-form" onSubmit={handleSubmit}>
+            <h2>Join a Room</h2>
             <div>
                 <label htmlFor="room">Room name:</label>
                 <input
@@ -21,7 +21,7 @@ const Lobby = ({
                 />
             </div>
 
-            <button type="submit" disabled={connecting}>
+            <button className="join-btn"type="submit" disabled={connecting}>
                 {connecting ? "Connecting" : "Join"}
             </button>
         </form>

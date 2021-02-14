@@ -4,11 +4,23 @@ import { connect } from "react-redux";
 
 class Home extends React.Component {
     render() {
-        return (
-            <div>
-                <h1> Welcome {this.props.username} </h1>
-            </div>
-        );
+        if (this.props.username != null)
+        {
+            return (
+                <div>
+                    <h1> Welcome, {this.props.username} </h1>
+                </div>
+            );
+        }
+        else {
+            return (
+                <div>
+                    <h1> What is Current? </h1>
+                </div>
+            );
+
+        }
+
     }
 }
 
