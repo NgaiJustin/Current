@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import Participant from "./Participant";
+import Participant from "../../../Participant";
 import SpeechRecognition, {
     useSpeechRecognition,
 } from "react-speech-recognition";
@@ -56,7 +56,7 @@ const Room = ({ roomName, room, handleLogout }) => {
     return (
         <div className="room">
             <h2>Room: {roomName}</h2>
-            <button onClick={handleLogout}>Leave Room</button>
+            <button onClick={handleLogout}>Log out</button>
             <div className="local-participant">
                 {room ? (
                     <Participant

@@ -3,50 +3,46 @@ import { Menu } from 'antd';
 import { Link} from 'react-router-dom';
 import { SettingOutlined } from '@ant-design/icons';
 
+import { connect } from "react-redux";
+
 const { SubMenu } = Menu;
 
 class NavBar extends React.Component {
     state = {
-        current: 'feed',
+        current: 'home',
+        username: localStorage.getItem("username")
       };
 
     handleClick = e => {
     console.log('click ', e);
     this.setState({ current: e.key });
     };
-
+    
     render() {
         const { current } = this.state;
         return (
             <Menu
-                defaultSelectedKeys={['feed']}
                 onClick={this.handleClick} 
-                selectedKeys={[current]} 
+                selectedKeys={current} 
                 mode="horizontal"
             >
-                <Menu.Item key="feed">
-                    <Link to="/">Feed</Link>
+                <Menu.Item key="home">
+                    <Link to="/">Home</Link>
                 </Menu.Item>
                 {this.props.isAuthenticated ?
                     [
-                        <Menu.Item key="create">
-                            <Link to="/upload">Create</Link>
+                        <Menu.Item key="vidcall">
+                            <Link to="/vidcall">Join a Room</Link>
                         </Menu.Item>,
-                        <Menu.Item key="videochat">
-                            <Link to="/join">Join a Room</Link>
-                        </Menu.Item>,
-                        <SubMenu  key="user"  title="Username">
+                        <SubMenu  key="user"  title={this.props.username}>
                             <Menu.ItemGroup>
                                 <Menu.Item key="profile">Profile</Menu.Item>
-                                <Menu.Item key="myvideos">My Videos</Menu.Item>
-                            </Menu.ItemGroup>
-                            <Menu.ItemGroup title="Account">
-                                <Menu.Item key="settings" icon={<SettingOutlined />}>Settings</Menu.Item>
+                                <Menu.Item key="logout">
+                                    <Link to="/logout">Logout</Link>
+                                </Menu.Item>
                             </Menu.ItemGroup>
                         </SubMenu>,
-                        <Menu.Item key="logout" onClick={this.props.logout}>
-                            Logout
-                        </Menu.Item>
+
                     ]
                 :
                     <Menu.Item key="login">
@@ -60,4 +56,10 @@ class NavBar extends React.Component {
 
 }
 
-export default NavBar;
+const mapStateToProps = state => {
+    return {
+        username: state.username
+    };
+};
+
+export default connect(mapStateToProps)(NavBar);

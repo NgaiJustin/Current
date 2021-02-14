@@ -8,7 +8,7 @@ import 'antd/dist/antd.css';
 import { connect } from 'react-redux';
 //components
 import BaseRouter from './BaseRouter';
-import CustomLayout from './containers/CustomLayout';
+import CustomLayout from './components/CustomLayout';
 
 //developer mode (set to false when building)
 const development_mode = false;

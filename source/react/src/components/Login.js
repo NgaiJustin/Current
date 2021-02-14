@@ -36,7 +36,7 @@ function Login (props){
 
   return (
     
-    <Form
+    <Form className="loginformstyle"
       {...layout}
       name="basic"
       initialValues={{
@@ -77,10 +77,16 @@ function Login (props){
 
       <Form.Item {...tailLayout}>
         <Button type="primary" htmlType="submit">
-          Submit
+          Login
         </Button>
       </Form.Item>
+        Not a member of Current yet? 
+        <NavLink 
+            style={{marginRight: '10px'}} 
+            to='/signup/'> Join us
+        </NavLink>
     </Form>
+    
   )
 };
 

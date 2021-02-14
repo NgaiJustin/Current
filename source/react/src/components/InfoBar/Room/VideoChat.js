@@ -1,19 +1,15 @@
 import React, { useState, useCallback, useEffect } from "react";
 import Video from "twilio-video";
-import Lobby from "./Lobby";
+import Lobby from "../../../Lobby";
 import Room from "./Room";
 
 const proxy = "http://localhost:3001";
 
 const VideoChat = () => {
-    const [username, setUsername] = useState("");
     const [roomName, setRoomName] = useState("");
     const [room, setRoom] = useState(null);
     const [connecting, setConnecting] = useState(false);
 
-    const handleUsernameChange = useCallback((event) => {
-        setUsername(event.target.value);
-    }, []);
 
     const handleRoomNameChange = useCallback((event) => {
         setRoomName(event.target.value);
@@ -26,7 +22,7 @@ const VideoChat = () => {
             const data = await fetch(proxy.concat("/video/token"), {
                 method: "POST",
                 body: JSON.stringify({
-                    identity: username,
+                    identity: localStorage.getItem("username"),
                     room: roomName,
                 }),
                 headers: {
@@ -45,7 +41,7 @@ const VideoChat = () => {
                     setConnecting(false);
                 });
         },
-        [roomName, username]
+        [roomName]
     );
 
     const handleLogout = useCallback(() => {
@@ -87,9 +83,8 @@ const VideoChat = () => {
     } else {
         render = (
             <Lobby
-                username={username}
+
                 roomName={roomName}
-                handleUsernameChange={handleUsernameChange}
                 handleRoomNameChange={handleRoomNameChange}
                 handleSubmit={handleSubmit}
                 connecting={connecting}

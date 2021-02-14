@@ -3,7 +3,8 @@ import { Layout } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../store/actions/auth';
-import NavBar from '../components/NavBar'
+import NavBar from './NavBar/NavBar'
+import '../layout.css'
 
 
 const { Header, Content, Footer } = Layout;
@@ -22,19 +23,25 @@ class CustomLayout extends React.Component {
 
     render() {
         return (
-            <Layout className="layout">
+            <section>
+            <Layout style={{backgroundColor: "blue"}}>
                 <Header style={{backgroundColor: "white"}}>
                     <NavBar {...this.props}></NavBar>
                 </Header>
                 <Content style={{ padding: '50px 50px'}}>
-                    <div style={{ background: 'white', padding: 24, minHeight: 280 }}>
+                    <div style={{ background: 'white', margin: 24, minHeight: 280 }}>
                         {this.props.children}
                     </div>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>
                   Current ©2021 Created by TeamName
                 </Footer>
+                <div class="wave wave1"></div>
+                <div class="wave wave2"></div>
+                <div class="wave wave3"></div>
+                <div class="wave wave4"></div>
             </Layout>
+            </section>
         );
     }
 }
