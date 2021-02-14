@@ -68,3 +68,17 @@ code {
 .join-form{
     padding-top: 120px;
 }
+
+.profile_title{
+    font-size: xx-large;
+    font-weight: 400;
+}
+.signupformstyle{
+    margin: auto auto;
+    margin-top: 60px;
+}
+
+.loginformstyle{
+    margin: auto auto;
+    margin-top: 100px;
+}

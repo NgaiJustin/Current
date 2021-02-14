@@ -116,7 +116,7 @@ function RegistrationForm  (props) {
     );
 
     return (
-      <Form
+      <Form className="signupformstyle"
         {...formItemLayout}
         form={form}
         name="register"

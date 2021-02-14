@@ -8,6 +8,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../store/actions/auth';
 
+
 const { Header, Content, Footer, Sider } = Layout;
 
 class CustomLayout extends React.Component {
@@ -37,7 +38,7 @@ class CustomLayout extends React.Component {
                             <Link to="/vidcall">Join a Room</Link>
                         </Menu.Item>,
                         <Menu.Item key="3" icon={<UserOutlined />}>
-                            <Link to="">{this.props.username}</Link>
+                            <Link to={`/profile/${this.props.username}`}>{this.props.username}</Link>
                         </Menu.Item>,
                         <Menu.Item key="4" icon={<LogoutOutlined />}>
                             <Link to="/logout">Logout</Link>

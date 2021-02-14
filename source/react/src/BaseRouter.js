@@ -9,6 +9,8 @@ import Join from "./components/Join/Join";
 import Speech from "./components/Speech/Speech";
 import VidCall from "./VidCall";
 import Home from "./components/Home/Home"
+import Profile from "./components/Profile"
+
 const BaseRouter = () => (
     <div>
         <Route exact path="/" component={Home} />{" "}
@@ -18,6 +20,7 @@ const BaseRouter = () => (
         <Route exact path="/join" component={Join} />
         <Route path="/chat" component={Chat} />
         <Route path="/vidcall" component={VidCall} />
+        <Route exact path="/profile/:username/" component={Profile} />{" "}
     </div>
 );
 
