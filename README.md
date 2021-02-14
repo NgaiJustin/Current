@@ -2,6 +2,8 @@
 
 We wanted to make it easier to meet people with like minded interests, get better notifications, and make conversation discovery easier. So we built an enabling technology. Current it's a mix between a conferencing app and a social network. Conversations are passed through a machine learning model that classifies the topic as the conversations goes along. Then people can discover chat rooms based on real time search of the conversation.
 
+![Alt text](/source/react/public/wave.png?raw=true "wave")
+
 ## Setup:
 
 **setup django:**
