@@ -3,6 +3,12 @@ import Participant from "../../../Participant";
 import SpeechRecognition, {
     useSpeechRecognition,
 } from "react-speech-recognition";
+import axios from "axios";
+
+const capitalize = (s) => {
+    if (typeof s !== "string") return "";
+    return s.charAt(0).toUpperCase() + s.slice(1);
+};
 
 const Room = ({ roomName, room, handleLogout }) => {
     const {
@@ -11,20 +17,38 @@ const Room = ({ roomName, room, handleLogout }) => {
         resetTranscript,
     } = useSpeechRecognition();
     const [completeTranscript, setCompleteTranscript] = useState("");
+    const [topic, setTopic] = useState("");
     const [participants, setParticipants] = useState([]);
     SpeechRecognition.startListening({
         continuous: true,
     });
 
     useEffect(() => {
-        if (finalTranscript) {
-            console.log(finalTranscript); // ping API POST WITH FULL STOP!!!
+        if (finalTranscript.includes("treehacks")) {
+            setTopic("Treehacks 🌲");
+        } else if (finalTranscript) {
+            const postBody = {
+                transcription: finalTranscript,
+                speakers: [],
+            };
+            console.log(postBody);
+            console.log("Currently posting");
+            axios
+                .post(
+                    "https://current-tag.herokuapp.com/tagging/transcription",
+                    postBody
+                )
+                .then((res) => {
+                    console.log(res.data.topic);
+                    setTopic(res.data.topic);
+                });
+
             setCompleteTranscript(
                 completeTranscript.concat(finalTranscript, ". ")
             );
             resetTranscript();
         }
-    });
+    }, [finalTranscript, completeTranscript, resetTranscript]);
 
     useEffect(() => {
         const participantConnected = (participant) => {
@@ -67,12 +91,13 @@ const Room = ({ roomName, room, handleLogout }) => {
                     ""
                 )}
             </div>
-            <h3>Transcript:</h3>
-            <p>
-                {completeTranscript} {transcript}
+            <h2 style={{ fontWeight: "bold" }}> 🌊 : {capitalize(topic)}</h2>
+            <h3 style={{ fontWeight: "bold" }}>Transcript:</h3>
+            <p style={{ textAlign: "center" }}>
+                {completeTranscript} {transcript}{" "}
             </p>
             <br></br>
-            <h3>Remote Participants</h3>
+            <h3 style={{ fontWeight: "bold" }}>Remote Participants</h3>
             <div className="remote-participants">{remoteParticipants}</div>
         </div>
     );
