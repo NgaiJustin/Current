@@ -8,7 +8,7 @@ class Home extends React.Component {
         {
             return (
                 <div>
-                    <h1> Welcome, {this.props.username} </h1>
+                    <h1> Welcome, {this.props.username}. </h1>
                 </div>
             );
         }
@@ -16,6 +16,7 @@ class Home extends React.Component {
             return (
                 <div>
                     <h1> What is Current? </h1>
+                    <div>need to write a description here!!t</div>
                 </div>
             );
 
