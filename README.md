@@ -27,3 +27,9 @@ cd source/django & python3 manage.py runserver
 cd source/express & npm run dev
 
 **Go localhost:3000 in your browser**
+
+## Credits
+- [Anastasia Spangler](https://devpost.com/anastasiaspangler)
+- [Aimee Tran](https://www.linkedin.com/in/aimeetran/)
+- [Luis Cermeno](https://www.linkedin.com/in/luis-cermeno-a90338206/)
+- [Justin Ngai](https://justinngai.me/)
